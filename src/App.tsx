@@ -7,6 +7,10 @@ import Users from "./pages/Admin/Users/Users"
 import Products from "./pages/Admin/Products/Products"
 import Feedback from "./pages/Admin/Feedback"
 import SellerDashboard from "./pages/Seller/SellerDashboard"
+import Orders from "./pages/Seller/Orders"
+import SellerProducts from "./pages/Seller/Products"
+import Customers from "./pages/Seller/Customers"
+import CustomerFeedback from "./pages/Seller/CustomerFeedback"
 
 const App = () => {
   return (
@@ -19,7 +23,13 @@ const App = () => {
           <Route path="/admin/users" element={<Users />} />
           <Route path="/admin/products" element={<Products />} />
           <Route path="/admin/feedbacks" element={<Feedback />} />
+
+          {/* Seller Routes */}
           <Route path="/seller/dashboard" element={<SellerDashboard />} />
+          <Route path="/seller/orders" element={<Orders />} />
+          <Route path="/seller/products" element={<SellerProducts />} />
+          <Route path="/seller/customer" element={<Customers />} />
+          <Route path="/seller/customer-feedbacks" element={<CustomerFeedback />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

@@ -100,9 +100,6 @@ const Products = () => {
                 ))}
               </select>
             </div>
-            <button className="btn btn-primary mt-4 sm:mt-0">
-              Add New Product
-            </button>
           </div>
         </div>
 

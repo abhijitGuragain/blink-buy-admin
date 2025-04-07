@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-// Define props interface with proper typing
 interface SellerLayoutProps {
   children: React.ReactNode;
 }
@@ -11,10 +10,10 @@ const SellerLayout = ({ children }: SellerLayoutProps) => {
 
   const navItems = [
     { name: 'Dashboard', path: '/seller/dashboard' },
-    { name: "Orders", path: "seller/orders" },
+    { name: "Orders", path: "/seller/orders" },
     { name: 'Products', path: '/seller/products' },
     { name: 'Customer', path: '/seller/customer' },
-    { name: 'Feedback', path: '/seller/feedback' },
+    { name: 'Feedback', path: '/seller/customer-feedbacks' },
     { name: "Profile", path: "seller/profile" },
   ];
 
@@ -23,11 +22,13 @@ const SellerLayout = ({ children }: SellerLayoutProps) => {
       {/* Sidebar */}
       <div
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-base-100 shadow-lg transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } lg:translate-x-0 lg:static lg:inset-0`}
+          } lg:translate-x-0 lg:static lg:inset-0 flex flex-col`}
       >
         {/* Brand Header */}
-        <div className="flex items-center justify-between h-20 px-6">
-          <h1 className="text-2xl font-bold text-white"><span>Blink<span className='text-primary'>Buy</span>&nbsp;Seller</span> </h1>
+        <div className="flex items-center justify-between h-20 px-6 border-b border-base-200">
+          <h1 className="text-2xl font-bold text-white">
+            <span>Blink<span className='text-primary'>Buy</span> Seller</span>
+          </h1>
           <button
             className="lg:hidden text-white"
             onClick={() => setIsSidebarOpen(false)}
@@ -39,7 +40,7 @@ const SellerLayout = ({ children }: SellerLayoutProps) => {
         </div>
 
         {/* Navigation */}
-        <nav className="mt-6 px-3">
+        <nav className="mt-6 px-3 flex-1">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
@@ -56,6 +57,16 @@ const SellerLayout = ({ children }: SellerLayoutProps) => {
             </NavLink>
           ))}
         </nav>
+
+        {/* Logout Button */}
+        <div className="p-3 border-t border-base-200">
+          <button className="btn btn-ghost w-full justify-start text-error hover:bg-error hover:text-white">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Main Content */}
@@ -74,6 +85,14 @@ const SellerLayout = ({ children }: SellerLayoutProps) => {
         <main className="flex-1 p-6">
           {children}
         </main>
+
+        {/* Footer */}
+        <footer className="footer footer-center p-4 bg-base-100 text-base-content border-t border-base-200">
+          <div>
+            <p>© {new Date().getFullYear()} BlinkBuy Seller - All rights reserved</p>
+            <p className="text-sm opacity-75">Built with ♥ by the BlinkBuy Team</p>
+          </div>
+        </footer>
       </div>
 
       {/* Overlay for mobile */}
