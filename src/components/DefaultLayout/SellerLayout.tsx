@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
-interface SellerLayoutProps {
-  children: React.ReactNode;
-}
 
-const SellerLayout = ({ children }: SellerLayoutProps) => {
+
+const SellerLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navItems = [
@@ -83,7 +81,7 @@ const SellerLayout = ({ children }: SellerLayoutProps) => {
 
         {/* Content Area */}
         <main className="flex-1 p-6">
-          {children}
+          <Outlet />
         </main>
 
         {/* Footer */}

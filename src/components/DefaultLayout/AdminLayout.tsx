@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 
 // Define props interface with proper typing
-interface AdminLayoutProps {
-  children: React.ReactNode;
-}
 
-const AdminLayout = ({ children }: AdminLayoutProps) => {
+
+const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navItems = [
@@ -87,7 +85,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
 
         {/* Main Content Area */}
         <main className="flex-1 p-6 lg:p-8">
-          {children}
+          <Outlet />
         </main>
 
         {/* Footer */}

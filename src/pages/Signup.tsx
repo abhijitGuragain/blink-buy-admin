@@ -1,5 +1,8 @@
 import { useForm } from 'react-hook-form';
 import Button from '../components/Button';
+import { ISignup } from '../interfaces/IAuth';
+import { signup } from '../services/AuthService';
+// import { ISignup } from '../interfaces/IAuth';
 
 const Signup = () => {
   // Initialize React Hook Form
@@ -10,20 +13,19 @@ const Signup = () => {
     watch,
   } = useForm({
     defaultValues: {
-      storeName: '',
+      store_name: '',
       email: '',
       password: '',
-      confirmPassword: '',
+      confirm_password: '',
       phone: '',
-      agreeTerms: false,
+      agree_terms: false,
     },
   });
 
   // Form submission handler
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: ISignup) => {
     try {
-      console.log('Seller Signup Data:', data);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock API call
+      signup(data)
       alert('Signup successful! Welcome to BlinkBuy.');
     } catch (error) {
       console.error('Signup error:', error);
@@ -50,27 +52,38 @@ const Signup = () => {
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-medium text-base-content">
-                  Store Name
+                  Company Name
                 </span>
               </label>
               <input
                 type="text"
-                placeholder="Enter your store name"
-                className={`input input-bordered w-full focus:input-primary focus:border-primary transition-colors duration-200 ${errors.storeName ? 'input-error' : ''
+                placeholder="Enter your company name"
+                className={`input input-bordered w-full focus:input-primary focus:border-primary transition-colors duration-200 ${errors.store_name ? 'input-error' : ''
                   }`}
-                {...register('storeName', {
-                  required: 'Store name is required',
+                {...register('store_name', {
+                  required: 'Company name is required',
                   minLength: {
                     value: 3,
                     message: 'Store name must be at least 3 characters',
                   },
                 })}
               />
-              {errors.storeName && (
+              {errors.store_name && (
                 <span className="text-error text-sm mt-1">
-                  {errors.storeName.message}
+                  {errors.store_name.message}
                 </span>
               )}
+            </div>
+
+            <div className='form-control'>
+              <label className="label">
+                <span className="label-text font-medium text-base-content">
+                  Company Address
+                </span>
+              </label>
+              <fieldset className="fieldset">
+                <textarea className="textarea w-full h-20" placeholder="Your Company Address"></textarea>
+              </fieldset>
             </div>
 
             {/* Email */}
@@ -137,17 +150,17 @@ const Signup = () => {
               <input
                 type="password"
                 placeholder="Confirm your password"
-                className={`input input-bordered w-full focus:input-primary focus:border-primary transition-colors duration-200 ${errors.confirmPassword ? 'input-error' : ''
+                className={`input input-bordered w-full focus:input-primary focus:border-primary transition-colors duration-200 ${errors.confirm_password ? 'input-error' : ''
                   }`}
-                {...register('confirmPassword', {
+                {...register('confirm_password', {
                   required: 'Please confirm your password',
                   validate: (value) =>
                     value === password || 'Passwords do not match',
                 })}
               />
-              {errors.confirmPassword && (
+              {errors.confirm_password && (
                 <span className="text-error text-sm mt-1">
-                  {errors.confirmPassword.message}
+                  {errors.confirm_password.message}
                 </span>
               )}
             </div>
@@ -185,20 +198,20 @@ const Signup = () => {
                 <input
                   type="checkbox"
                   className="checkbox checkbox-primary border-base-content/20 checked:border-accent"
-                  {...register('agreeTerms', {
+                  {...register('agree_terms', {
                     required: 'You must agree to the terms',
                   })}
                 />
                 <span className="label-text text-base-content/80">
                   I agree to BlinkBuy's{' '}
-                  <a href="#" className="link link-primary">
+                  <a href="/terms-and-conditions" className="link link-primary">
                     Terms & Conditions
                   </a>
                 </span>
               </label>
-              {errors.agreeTerms && (
+              {errors.agree_terms && (
                 <span className="text-error text-sm mt-1">
-                  {errors.agreeTerms.message}
+                  {errors.agree_terms.message}
                 </span>
               )}
             </div>
@@ -210,7 +223,7 @@ const Signup = () => {
                 variant="primary"
                 className="w-full btn-lg hover:btn-primary-focus transition-all duration-300"
               >
-                {isSubmitting ? "Signing In..." : "Sign In"}
+                {isSubmitting ? "Signing Up..." : "Sign Up"}
               </Button>
             </div>
           </form>
@@ -228,8 +241,8 @@ const Signup = () => {
             </p>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
